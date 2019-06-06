@@ -4,6 +4,7 @@ var auth = require('./auth.json');
 var fs = require('fs');
 var path = require('path');
 var filePath = path.join(__dirname,'output.txt');
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -25,12 +26,12 @@ function readOutput() {
 	var fileStats = fs.statSync(filePath);
 	var fileSize = fileStats.size;
 	if(fileSize > 0) {
-		fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data) {
+		fs.readFile(filePath, function(err,data) {
 			if(!err) {
-				console.log(data);
+				let entry = JSON.parse(data);
 				bot.sendMessage({
-				to: '520593589990981632',
-				message: data
+				to: '355459010549514241',
+				message: entry.message
 				});
 			}
 			else {
